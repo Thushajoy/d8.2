@@ -1,0 +1,17 @@
+hello.hello:
+  title: 'Hello!'
+  route_name: hello.hello
+  base_route: hello.hello
+  weight: 1
+
+hello.nodelist:
+  title: 'Nodelist'
+  route_name: hello.nodelist
+  base_route: hello.hello
+  weight: 2
+
+hello.user.statistics:
+  title: 'Connections'
+  route_name: hello.user.statistics
+  base_route: entity.user.canonical
+  weight: 3

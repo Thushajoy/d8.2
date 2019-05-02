@@ -1,0 +1,14 @@
+#module name
+name: Hello
+#Description of module
+description: Hello module for d8.2 developer training
+#Type of code
+type: module
+#version of drupal module
+core: 8.x
+#version of module
+version: 8.x-1.0
+
+
+
+
