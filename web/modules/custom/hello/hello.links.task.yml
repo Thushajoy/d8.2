@@ -15,3 +15,8 @@ hello.user.statistics:
   route_name: hello.user.statistics
   base_route: entity.user.canonical
   weight: 3
+
+hello.calculator:
+  title: 'Calculator'
+  route_name: hello.calculator
+  base_route: hello.hello
