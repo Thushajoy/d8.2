@@ -38,6 +38,7 @@ function hello_schema(){
 /**
  *
  */
+
 function hello_update_8001(){
   $field_spec = [
     'type' => 'int',
@@ -47,6 +48,9 @@ function hello_update_8001(){
   ];
   $schema = Database::getConnection()->schema();
   $schema ->addfield('hello_user_statistics','Action',$field_spec);
+}
+function hello_uninstall(){
+  \Drupal::state()->delete('hello_form_submission_time');
 }
 
 

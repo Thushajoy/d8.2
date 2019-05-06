@@ -49,7 +49,7 @@ class HelloForm extends FormBase{
     );
     return $form;
   }
-  
+
   /**
    *{@inheritdoc}.
    */
@@ -63,7 +63,7 @@ class HelloForm extends FormBase{
     if (!is_numeric($Second_Value)) {
       $form_state->setErrorByName('second_value', $this->t('Value 2 should Be Numeric!'));
     }
- 
+
     $operation = $form_state->getValue('operations');
     if ($Second_Value == '0' && $operation == 'Division') {
       $form_state->setErrorByName('Second_Value', $this->t('Should Be not zero.'));
@@ -93,6 +93,8 @@ class HelloForm extends FormBase{
     };
     $form_state->addRebuildInfo('result',$result);
     $form_state->setRebuild();
+    #Save a given State with State API
+    \Drupal::state()->set('hello_form_submission_time',\Drupal::service('datetime.time')->getCurrentTime());
   }
 
 }

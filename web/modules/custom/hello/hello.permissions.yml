@@ -1,0 +1,9 @@
+my permission:
+ title: 'Access hello'
+ desscription: 'Description for Access hello'
+ restrict access: 'true'
+
+administer hello:
+ title: 'Administer hello'
+ description: 'Description for Administer hello'
+ restrict access: 'true'

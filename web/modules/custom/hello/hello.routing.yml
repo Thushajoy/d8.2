@@ -24,6 +24,7 @@ hello.user.statistics:
  requirements:
    _access: 'TRUE'
 
+
 hello.calculator:
   path: '/calculator'
   defaults:
@@ -38,4 +39,5 @@ hello.config:
    _title: 'AdminForm'
    _form: 'Drupal\hello\Form\AdminForm'
  requirements:
-   _access: 'TRUE'
+   _permission: 'administer hello'
+

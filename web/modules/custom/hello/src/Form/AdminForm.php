@@ -25,7 +25,7 @@ protected function getEditableConfigNames(){
   public function buildForm(array $form, FormStateInterface $form_state){
     $form['list'] = array(
       '#type' => 'select',
-      '#title'=> 'List',
+      '#title'=> 'How Long To Keep User Activity Statistics',
       '#options'=>array(
         '0' => '0 day',
         '1'=> '1 day',

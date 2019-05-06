@@ -6,37 +6,48 @@ function hello_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route
     // Main module help for the block module.
     case 'help.page.hello':
       return '<p>' . t('Hello thusha') . '<p>' ;
-
-
 }
 }
 
 function hello_cron() {
 
-  Drupal::messenger()->addMessage(t("Your Hello function Access Denied"), "error");
+  //Drupal::messenger()->addMessage(t("Your Hello function Access Denied"), "error");
+$purge_days_number = \Drupal::config('hello.settings')->get('purge_days_number');
+if($purge_days_number !='0'){
+  $nombre_supperessions = \Drupal::database()->delete('hello_user_statistics')->condition('time', REQUEST_TIME - $purge_days_number *(24*3600), '<')->execute();
 
+  \Drupal::messenger()->addMessage(t('@nombre_supperessions records have been deleted.',['@nombre_supperessions' =>
+    $nombre_supperessions]));
+}
 }
 
 function hello_user_login(Drupal\User\UserInterface $account) {
-
-  \Drupal::messenger()->addMessage(t('Welcome Dear %name.',['%name' => $account->getAccountName()]));
   //ksm(\Drupal::database());
-  \Drupal::database ()->insert ('hello_user_statistics')
-    ->fields([
+  \Drupal::database()->insert('hello_user_statistics')->fields([
       'uid'=>$account->id(),
       'action'=> '1',
       'time' => REQUEST_TIME,
-    ])
-    ->execute();
-
+    ])->execute();
+  \Drupal::messenger()->addMessage(t('Welcome Dear %name.',['%name' => $account->getAccountName()]));
 }
+
+
 function hello_user_logout($account) {
-  \Drupal::database()->insert('hello_user_statistics')
-    ->fields([
+  \Drupal::database()->insert('hello_user_statistics')->fields([
       'uid'=> $account->id(),
       'action'=> '0',
       'time' => REQUEST_TIME,
-    ])
-    ->execute();
+    ])->execute();
 
+}
+function hello_theme()
+{
+  return array(
+    'hello_user_connection' => array(
+      'template' => 'hello-user-connection',
+      'variables' => array('data' => Null,
+        'user' => NULL ,
+        'count'=>NULL),
+    ),
+  );
 }
