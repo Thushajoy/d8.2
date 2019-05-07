@@ -17,12 +17,12 @@ hello.nodelist:
    _access: 'TRUE'
 
 hello.user.statistics:
- path: '/user/{user}/statistics'
- defaults:
-   _title: 'Statistics'
-   _controller: 'Drupal\hello\Controller\StatisticsController::content'
- requirements:
-   _access: 'TRUE'
+  path: '/user/{user}/statistics'
+  defaults:
+    _title: 'Statistics'
+    _controller: 'Drupal\hello\Controller\StatisticsController::content'
+  requirements:
+    _access_hello: '48'
 
 
 hello.calculator:
@@ -34,10 +34,10 @@ hello.calculator:
     _access: 'TRUE'
 
 hello.config:
- path: '/admin/config/hello'
- defaults:
-   _title: 'AdminForm'
-   _form: 'Drupal\hello\Form\AdminForm'
- requirements:
-   _permission: 'administer hello'
+  path: '/admin/config/hello'
+  defaults:
+    _title: 'AdminForm'
+    _form: 'Drupal\hello\Form\AdminForm'
+  requirements:
+    _permission: 'administer hello'
 

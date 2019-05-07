@@ -1,5 +1,6 @@
 
 <?php
+use \Drupal\Core\Form\FormStateInterface;
 function hello_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route_match) {
   switch ($route_name) {
 
@@ -29,6 +30,19 @@ function hello_user_login(Drupal\User\UserInterface $account) {
       'time' => REQUEST_TIME,
     ])->execute();
   \Drupal::messenger()->addMessage(t('Welcome Dear %name.',['%name' => $account->getAccountName()]));
+
+  $roles =\Drupal::config('hello.settings')->get('role_user_connections');
+  $user_roles = $account->getRoles();
+  $diff = array_intersect($roles, $user_roles);
+  if(count($diff)>'0'){
+    \Drupal::database()->insert('hello_user_statistics')
+      ->fields([
+        'uid' => $account->id(),
+        'action' => '1',
+        'time' => REQUEST_TIME,
+      ])
+      ->execute();
+  }
 }
 
 
@@ -50,4 +64,34 @@ function hello_theme()
         'count'=>NULL),
     ),
   );
+}
+
+function hello_form_user_admin_settings_alter(array &$form,FormStateInterface $form_state){
+  $roles_config=\Drupal::config('hello.settings')->get('role_user_connections');
+  $roles = \Drupal::entityTypeManager()->getStorage('user_role')->loadMultiple();
+
+$options = [];
+unset($roles['anonymous']);
+foreach ($roles as $key=>$role){
+  $options[$key] = $role->label();
+}
+
+$form['test']=[
+  '#type' => 'details',
+  '#title' =>t('Roles for which to collect activity statistics'),
+  '#open'=> TRUE,
+  '#weight'=>'-100',
+];
+  $form['test']['roles']= [
+    '#type' => 'checkboxes',
+    '#options' => $options,
+    '#default_value' => $roles_config,
+      ];
+
+$form['#submit'][]='hello_form_user_admin_settings_submit';
+}
+
+function hello_form_user_admin_settings_submit($form, FormStateInterface $formState){
+  $config = \Drupal::configFactory()->getEditable('hello.settings');
+  $config->set('role_user_connections',$formState->getValue('roles'))->save();
 }
