@@ -3,6 +3,7 @@ hello.page:
   route_name: hello.hello
   description: 'Hello Page'
   menu_name: main
+  weight: 2
 
 hello.config:
   title: 'Admin Config'
