@@ -23,7 +23,6 @@
         "drupal/admin_toolbar": "^1.26",
         "drupal/config_split": "^1.4",
         "drupal/console": "^1.0.2",
-        "drupal/core": "^8.6.0",
         "drush/drush": "^9.0.0",
         "vlucas/phpdotenv": "^2.4",
         "webflo/drupal-finder": "^1.0.0",
@@ -31,7 +30,8 @@
         "zaporylie/composer-drupal-optimizations": "^1.0"
     },
     "require-dev": {
-        "drupal/devel": "^2.0",
+        "drupal/core": "^8.7",
+        "drupal/devel": "^2.1",
         "drupal/module_filter": "^3.1",
         "webflo/drupal-core-require-dev": "^8.6.0"
     },

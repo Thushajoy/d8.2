@@ -1,0 +1,6 @@
+purge_days_number: '7'
+role_user_connections:
+  authenticated: authenticated
+  administrator: administrator
+_core:
+  default_config_hash: 0CYXLZBHYVe9E7SIRicgIQN21IEe4nkY6r8ulFMbZHA

@@ -1,0 +1,10 @@
+#module name
+name: Nodelist
+#Description of module
+description: Node list
+#Type of code
+type: module
+#version of drupal module
+core: 8.x
+#version of module
+version: 8.x-1.0
